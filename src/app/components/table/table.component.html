@@ -1,0 +1,35 @@
+
+<!-- <div>
+  <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton" [formGroup]="formGroup">
+    <input type="text" nz-input placeholder="input search text" formControlName="keyword" />
+  </nz-input-group>
+  <ng-template #suffixIconButton>
+    <button nz-button nzType="primary" nzSearch (click)="onSearch()">
+      <i nz-icon nzType="search"></i>
+    </button>
+  </ng-template>
+  <table mat-table [dataSource]="scholars_list" class="mat-elevation-z8">
+    <ng-container matColumnDef="scholar_name">
+      <th mat-header-cell *matHeaderCellDef>姓名</th>
+      <td mat-cell *matCellDef="let element">{{ element.scholar_name }}</td>
+    </ng-container>
+    <ng-container matColumnDef="scholar_project_count">
+      <th mat-header-cell *matHeaderCellDef>計畫筆數</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.scholar_project_count }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="scholar_s_id">
+      <th mat-header-cell *matHeaderCellDef>學者編號</th>
+      <td mat-cell *matCellDef="let element">{{ element.scholar_s_id }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  <mat-paginator
+    [pageSize]="10"
+    showFirstLastButtons
+    aria-label="scholar paginator"
+  ></mat-paginator>
+</div> -->

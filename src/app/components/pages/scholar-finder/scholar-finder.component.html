@@ -1,0 +1,112 @@
+<div class="scholar-finder-container">
+  <div class="scholar-finder-ctrl">
+    <form nz-form [formGroup]="formGroup">
+      <nz-form-item>
+        <nz-form-control>
+          <div class="scholar-finder-ctrl-chosen-keyword">
+            <div>已使用關鍵字:&nbsp;</div>
+            <nz-tag *ngFor="let keyword of keywordChosen" nzMode="closeable" (nzOnClose)="onRemoveKeyword(keyword)">
+              {{ keyword }}
+            </nz-tag>
+          </div>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <div class="scholar-finder-ctrl-search">
+            <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+              <input
+                type="text"
+                nz-input
+                placeholder="input search text"
+                formControlName="search"
+              />
+            </nz-input-group>
+            <ng-template #suffixIconButton>
+              <button
+                nz-button
+                nzType="primary"
+                nzSearch
+                (click)="onAddKeyword()"
+              >
+                <i nz-icon nzType="plus" nzTheme="outline"></i>
+              </button>
+              <button nz-button nzType="primary" nzSearch (click)="onScholarSearch()">
+                <i nz-icon nzType="search"></i>
+              </button>
+            </ng-template>
+          </div>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <div class="scholar-finder-ctrl-suggest-keyword">
+            <div>推薦關鍵字:&nbsp;</div>
+            <nz-tag *ngFor="let keyword of keywordSuggest">
+              {{ keyword }}
+            </nz-tag>
+          </div>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </div>
+  <div class="scholar-finder-display">
+    <div class="scholar-finder-display-data">
+      <button nz-button nzType="primary" (click)="onAddToCart()">
+        新增到學者清單
+      </button>
+      <nz-table
+        #scholarTable
+        [nzData]="scholarData"
+        [nzNoResult]="' '"
+        [nzLoading]="isScholarDataFetching"
+        (nzCurrentPageDataChange)="onScholarTablePageChange($event)"
+      >
+        <thead>
+          <tr>
+            <th
+              [nzChecked]="isScholarDataSelectAll"
+              [nzIndeterminate]="isScholarDataSelectPartial"
+              (nzCheckedChange)="onScholarDataCheckedAll($event)"
+            ></th>
+            <th>Name</th>
+            <th>Project Count</th>
+            <th>學者編號</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of scholarTable.data">
+            <td
+              [nzChecked]="selectedScholarData.has(data.scholar_s_id)"
+              (nzCheckedChange)="
+                onScholarDataChecked(data.scholar_s_id, $event)
+              "
+            ></td>
+            <td>{{ data.scholar_name }}</td>
+            <td>{{ data.scholar_project_count }}</td>
+            <td>{{ data.scholar_s_id }}</td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+    <div class="scholar-finder-display-record">
+      <nz-table
+        #histroyTable
+        [nzData]="searchHistoryList"
+        [nzNoResult]="' '"
+        [nzLoading]="isHistoryDataFetching"
+      >
+        <thead>
+          <tr>
+            <th>搜尋紀錄</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of histroyTable.data">
+            <td>{{ data | join: " + " }}</td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+.scholar-finder-container {
+  min-height: 100%;
+
+  .scholar-finder-ctrl {
+    .scholar-finder-ctrl-chosen-keyword {
+      display: flex;
+    }
+    .scholar-finder-ctrl-suggest-keyword {
+      display: flex;
+    }
+  }
+  .scholar-finder-display {
+    display: flex;
+    .scholar-finder-display-data {
+      min-width: 400px;
+      flex-grow: 1;
+    }
+    .scholar-finder-display-record {
+      min-width: 250px;
+    }
+  }
+}
