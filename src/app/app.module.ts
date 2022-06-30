@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { TestComponent } from './components/test/test.component';
 import { TableComponent } from './components/table/table.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -18,12 +18,14 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { JoinPipe } from './pipes/join.pipe';
 import { IconDefinition } from '@ant-design/icons-angular';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 import { PlusOutline } from '@ant-design/icons-angular/icons';
+import { ScholarResultListComponent } from './components/pages/scholar-result-list/scholar-result-list.component';
 const icons: IconDefinition[] = [ PlusOutline ];
 
 @NgModule({
-  declarations: [AppComponent, TestComponent, TableComponent, ScholarFinderComponent, JoinPipe],
+  declarations: [AppComponent, TestComponent, TableComponent, ScholarFinderComponent, JoinPipe, ScholarResultListComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -36,7 +38,9 @@ const icons: IconDefinition[] = [ PlusOutline ];
     NzFormModule,
     NzTagModule,
     NzLayoutModule,
-    NzTableModule
+    NzTableModule,
+    NzSelectModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

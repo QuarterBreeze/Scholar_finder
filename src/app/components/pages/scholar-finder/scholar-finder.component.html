@@ -4,8 +4,13 @@
       <nz-form-item>
         <nz-form-control>
           <div class="scholar-finder-ctrl-chosen-keyword">
-            <div>已使用關鍵字:&nbsp;</div>
-            <nz-tag *ngFor="let keyword of keywordChosen" nzMode="closeable" (nzOnClose)="onRemoveKeyword(keyword)">
+            <div style="font-size: 100%">已使用關鍵字:&nbsp;</div>
+            <nz-tag
+              *ngFor="let keyword of keywordChosen"
+              nzMode="closeable"
+              (nzOnClose)="onRemoveKeyword(keyword)"
+              style="font-size: 80%"
+            >
               {{ keyword }}
             </nz-tag>
           </div>
@@ -18,7 +23,7 @@
               <input
                 type="text"
                 nz-input
-                placeholder="input search text"
+                placeholder="請輸入關鍵字"
                 formControlName="search"
               />
             </nz-input-group>
@@ -31,7 +36,12 @@
               >
                 <i nz-icon nzType="plus" nzTheme="outline"></i>
               </button>
-              <button nz-button nzType="primary" nzSearch (click)="onScholarSearch()">
+              <button
+                nz-button
+                nzType="primary"
+                nzSearch
+                (click)="onScholarSearch()"
+              >
                 <i nz-icon nzType="search"></i>
               </button>
             </ng-template>
@@ -40,9 +50,48 @@
       </nz-form-item>
       <nz-form-item>
         <nz-form-control>
+          <div class="scholar-finder-ctrl-search-conditions">
+            <div class="label" style="font-size: 125%">搜尋條件:&nbsp;</div>
+            <nz-select
+              nzShowSearch
+              nzAllowClear
+              nzPlaceHolder="請選擇學校"
+              [nzOptions]="schoolData"
+              formControlName="school"
+              [nzDisabled]="isSchoolDataFetching"
+              style="min-width: 170px"
+            >
+            </nz-select>
+            <nz-select
+              nzShowSearch
+              nzAllowClear
+              nzPlaceHolder="請選擇系所"
+              [nzOptions]="departmentData"
+              formControlName="department"
+              [nzDisabled]="isSchoolDataFetching"
+              style="min-width: 170px"
+            >
+            </nz-select>
+            <nz-select
+              nzShowSearch
+              nzAllowClear
+              nzPlaceHolder="請選擇性別"
+              formControlName="sex"
+            >
+              <nz-option nzLabel="男" nzValue="male"></nz-option>
+              <nz-option nzLabel="女" nzValue="female"></nz-option>
+            </nz-select>
+          </div>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
           <div class="scholar-finder-ctrl-suggest-keyword">
-            <div>推薦關鍵字:&nbsp;</div>
-            <nz-tag *ngFor="let keyword of keywordSuggest">
+            <div style="font-size: 125%">推薦關鍵字: &nbsp;</div>
+            <nz-tag
+              *ngFor="let keyword of keywordSuggest"
+              style="font-size: 120%"
+            >
               {{ keyword }}
             </nz-tag>
           </div>
@@ -52,9 +101,10 @@
   </div>
   <div class="scholar-finder-display">
     <div class="scholar-finder-display-data">
-      <button nz-button nzType="primary" (click)="onAddToCart()">
+      <!-- <button nz-button nzType="primary" (click)="onAddToCart()">
         新增到學者清單
       </button>
+      <button nz-button nzType="primary" (click)="test()">TEST</button> -->
       <nz-table
         #scholarTable
         [nzData]="scholarData"
@@ -62,48 +112,75 @@
         [nzLoading]="isScholarDataFetching"
         (nzCurrentPageDataChange)="onScholarTablePageChange($event)"
       >
-        <thead>
-          <tr>
+        <thead style="font-size: 125%">
+          <tr style="font-size: 125%">
             <th
               [nzChecked]="isScholarDataSelectAll"
               [nzIndeterminate]="isScholarDataSelectPartial"
               (nzCheckedChange)="onScholarDataCheckedAll($event)"
             ></th>
-            <th>Name</th>
-            <th>Project Count</th>
-            <th>學者編號</th>
+            <th style="min-width: 95px">姓名</th>
+            <th style="min-width: 110px">計畫數量</th>
+            <th style="min-width: 150px">學校</th>
+            <th style="min-width: 170px">科系</th>
+            <th style="min-width: 110px">職位</th>
+            <th style="max-width: 150px">E-mail</th>
+            <th>電話</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody style="font-size: 125%">
           <tr *ngFor="let data of scholarTable.data">
             <td
-              [nzChecked]="selectedScholarData.has(data.scholar_s_id)"
-              (nzCheckedChange)="
-                onScholarDataChecked(data.scholar_s_id, $event)
-              "
+              [nzChecked]="selectedScholarData.has(data.s_id)"
+              (nzCheckedChange)="onScholarDataChecked(data.s_id, $event)"
             ></td>
-            <td>{{ data.scholar_name }}</td>
-            <td>{{ data.scholar_project_count }}</td>
-            <td>{{ data.scholar_s_id }}</td>
+            <td>{{ data.name }}</td>
+            <td>{{ data.project_count }}</td>
+            <td>{{ data.institution }}</td>
+            <td>{{ data.department }}</td>
+            <td>{{ data.position }}</td>
+            <td>{{ data.mail }}</td>
+            <td>{{ data.phone }}</td>
           </tr>
         </tbody>
       </nz-table>
     </div>
     <div class="scholar-finder-display-record">
+      <button nz-button nzType="primary" (click)="onRedirectToResult()">
+        前往結果頁
+      </button>
       <nz-table
         #histroyTable
         [nzData]="searchHistoryList"
         [nzNoResult]="' '"
         [nzLoading]="isHistoryDataFetching"
+        [nzShowPagination]="false"
       >
         <thead>
-          <tr>
+          <tr style="font-size: 125%">
+            <!-- <th (nzCheckedChange)="onHistoryDataCheckedAll($event)"></th> -->
+            <th
+              [nzChecked]="isHistoryDataSelectAll"
+              [nzIndeterminate]="isHistoryDataSelectPartial"
+              (nzCheckedChange)="onHistoryDataCheckedAll($event)"
+            ></th>
             <th>搜尋紀錄</th>
           </tr>
         </thead>
-        <tbody>
-          <tr *ngFor="let data of histroyTable.data">
-            <td>{{ data | join: " + " }}</td>
+        <tbody style="font-size: 125%">
+          <tr *ngFor="let data of histroyTable.data; let idx = index">
+            <td
+              [nzChecked]="data['checked']"
+              (nzCheckedChange)="onHistoryDataChecked(idx, $event)"
+            ></td>
+            <td>
+              <a (click)="testFetch(idx)">
+                {{ data["keywords"] | join: " + " }} <br />{{
+                  data["institution"]
+                }}
+                {{ data["department"] }}({{ data["s_ids"]?.length }})
+              </a>
+            </td>
           </tr>
         </tbody>
       </nz-table>

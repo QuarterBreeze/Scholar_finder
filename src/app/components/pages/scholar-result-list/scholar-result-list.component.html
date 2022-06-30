@@ -1,0 +1,63 @@
+<div class="scholar-result-container">
+  <div class="schoalr-result-dispaly">
+    <div class="scholar-result-table-display-data">
+      <nz-table #nestedTable [nzData]="scholarData">
+        <thead>
+          <tr class="outer-table">
+            <!-- <th></th> -->
+            <th>學者姓名</th>
+            <th>學校</th>
+            <th>科系</th>
+            <th>職位</th>
+            <th>E-mail</th>
+            <!-- <th>電話</th> -->
+            <th style="width: 10cm">計畫名稱</th>
+            <th style="width: 1.75cm">年度</th>
+            <th style="width: 2.25cm">金額(千)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- <ng-template ngFor let-data [ngForOf]="nestedTable.data"> -->
+          <ng-container *ngFor="let data of nestedTable.data; let idx = index">
+            <tr>
+              <!-- <td [(nzExpand)]="data.expand"></td> -->
+              <td [rowSpan]="2">{{ data.scholar.name }}</td>
+              <td [rowSpan]="2">{{ data.scholar.institution }}</td>
+              <td [rowSpan]="2">{{ data.scholar.department }}</td>
+              <td [rowSpan]="2">{{ data.scholar.position }}</td>
+              <td [rowSpan]="2">{{ data.scholar.mail }}</td>
+              <!-- <td [rowSpan]="2">{{ data.scholar.phone }}</td> -->
+              <td>{{ data.project[0].project_name }}</td>
+              <td>{{ data.project[0].project_YEAR }}</td>
+              <td>{{ data.project[0].project_AMT }}</td>
+            </tr>
+            <tr>
+              <!-- <td [(nzExpand)]="data.expand"></td> -->
+              <td>{{ data.project[1]?.project_name }}</td>
+              <td>{{ data.project[1]?.project_YEAR }}</td>
+              <td>{{ data.project[1]?.project_AMT }}</td>
+            </tr>
+          </ng-container>
+          <!-- <tr [nzExpand]="data.expand" [nzExpand]="true">
+              <div class="inner-table">
+                <nz-table
+                  #innerTable
+                  [nzData]="data.project"
+                  [nzShowPagination]="false"
+                >
+                  <tbody>
+                    <tr *ngFor="let data of innerTable.data">
+                      <td>{{ data.project_name }}</td>
+                      <td>{{ data.project_YEAR }}</td>
+                      <td>{{ data.project_AMT }}</td>
+                    </tr>
+                  </tbody>
+                </nz-table>
+              </div>
+            </tr> -->
+          <!-- </ng-template> -->
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+</div>

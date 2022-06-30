@@ -1,22 +1,39 @@
 .scholar-finder-container {
   min-height: 100%;
-
+  padding:1rem 1.5rem;
   .scholar-finder-ctrl {
+    .scholar-finder-ctrl-search{
+      display: flex;
+      max-width: 43%;
+    }
     .scholar-finder-ctrl-chosen-keyword {
       display: flex;
+      font-size: 150%;
     }
     .scholar-finder-ctrl-suggest-keyword {
       display: flex;
+    }
+    .scholar-finder-ctrl-search-conditions{
+      display: flex;
+      .label{
+        min-width: 100px;
+      }
+      nz-select{
+        max-width: 12%;
+      }
     }
   }
   .scholar-finder-display {
     display: flex;
     .scholar-finder-display-data {
+      padding:3rem 0.75rem;
       min-width: 400px;
       flex-grow: 1;
     }
     .scholar-finder-display-record {
-      min-width: 250px;
+      padding:1rem 0.75rem;
+      max-width: 320px;
+      min-width: 320px;
     }
   }
 }
