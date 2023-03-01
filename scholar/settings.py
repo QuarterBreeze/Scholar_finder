@@ -80,10 +80,10 @@ WSGI_APPLICATION = 'scholar.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sna_network',
-        'USER': 'kdd',
-        'PASSWORD': 'eS414o6kdd',
-        'HOST': '140.116.39.177',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
         'PORT': 3306,
     },
 }
